@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% csrf_token %}
+    <h1>profile_id: {{ profile_id }}, StravaUser id: {{ strava_user_id }}</h1>
+{% endblock %}

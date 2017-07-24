@@ -9,12 +9,9 @@ class AthleteInline(admin.StackedInline):
     can_delete = False
     verbose_name_plural = 'athlete'
 
-
 class UserAdmin(BaseUserAdmin):
     inlines = (AthleteInline, )
 
-
 admin.site.register(StravaUser, UserAdmin)
-# admin.site.unregister(User)
 admin.site.register(Map)
 admin.site.register(Activity)

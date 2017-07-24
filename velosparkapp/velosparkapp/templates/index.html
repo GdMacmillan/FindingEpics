@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="text">
+                <h1>GRIT</h1>
+                <h1>SWEAT</h1>
+                <h1>DATA...</h1>
+                <p>
+                    placeholder
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>About</h2>
+                <p>FindingEpics is an activity recommender app designed to make personalized recommendations that match your previous experiences. The engine uses a powerful algorithm to match you with the most likely rides or runs from your strava data.</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <footer class="homepage-footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <p>&copy; Your Company {% now 'Y' %}</p>
+                    <p>
+                        <a class="btn btn-default"
+                        href="{% url 'contact' %}" role="button">
+                        Contact us »
+                        </a>
+                    </p>
+                </div>
+                <div class="col-lg-6 pull-right">
+                    <img class="col-md-4 pull-right" height="50px" width="auto" src="{% static "images/api_logo_pwrdBy_strava_stack_light.png" %}" alt="Powered By Strava"/>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

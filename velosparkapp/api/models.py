@@ -41,7 +41,7 @@ class Athlete(models.Model):
     clubs = JSONField(blank=True, default="{}")
     bikes = JSONField(blank=True, default="{}")
     shoes = JSONField(blank=True, default="{}")
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    stravauser = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return "Athlete: {0} {1}".format(self.firstname, self.lastname)
