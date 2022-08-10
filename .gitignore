@@ -5,3 +5,11 @@ old_web_app
 metastore_db
 *.pyc
 .env.*
+*.db
+
+## data dirs
+city_data
+data
+
+## data files
+activities.json
