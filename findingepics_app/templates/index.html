@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindingEpics</title>
+
+    <script src="https://unpkg.com/htmx.org@1.7.0" integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+    <div class="mx-4">
+        <p class="text-2x1 font-bold mb-4">Activity List</p>
+
+            <table class="min-w-[50%] mb-4">
+                <thead class="border-b text-lg">
+                    <tr>
+                        <th class="border">Activity Name</th>
+                        <th class="border">Type</th>
+                        <th class="border">Map</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center text-sm" id="table-body">
+                    {% include 'table.html' %}
+                </tbody>
+            </table>
+
+    </div>
+</body>
+</html>
