@@ -1,6 +1,6 @@
 import json
 import os
-import pathlib
+import pdb
 from pipes import Template
 from typing import Optional, List, Union
 from fastapi import Depends, FastAPI, Request, Response, Header, HTTPException
@@ -8,6 +8,10 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
+from starlette.middleware.sessions import SessionMiddleware
+from starlette.requests import Request
+from starlette.config import Config
+from authlib.integrations.starlette_client import OAuth, OAuthError
 
 from . import crud, models, schemas
 from .database import SessionLocal, engine
@@ -18,6 +22,21 @@ HERE = os.path.basename(os.path.dirname(__file__))
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+config = Config(os.path.join(os.path.dirname(HERE), '.env.local'))
+
+oauth = OAuth(config)
+oauth.register(
+    'strava',
+    access_token_url='https://www.strava.com/oauth/token',
+    access_token_param=None,
+    authorize_url='https://www.strava.com/oauth/authorize',
+    authorize_params=None,
+    api_base_url='https://www.strava.com/api/v3/',
+    client_kwargs={'scope': 'activity:read'},
+)
+
+app.add_middleware(SessionMiddleware, secret_key="!secret")
 
 app.mount("/static", StaticFiles(directory=os.path.join(HERE, "static")), name="static")
 
@@ -76,3 +95,22 @@ def activity(
         raise HTTPException(status_code=404, detail="Activity not found")
 
     return templates.TemplateResponse("activity.html", context)
+
+
+@app.get("/login")
+async def login(request: Request):
+    redirect_uri = request.url_for('auth')
+    return await oauth.strava.authorize_redirect(request, redirect_uri)
+
+
+@app.get("/auth")
+async def auth(request: Request):
+    kwargs = {
+        'client_id': oauth.strava.client_id,
+        'client_secret': oauth.strava.client_secret,
+        'grant_type': 'authorization_code',
+        'f': 'json',
+    }
+
+    token = await oauth.strava.authorize_access_token(request, **kwargs)
+    print(token)
