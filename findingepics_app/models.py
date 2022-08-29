@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, Boolean, Float, String, PickleType, ARRAY
+from sqlalchemy import Column, Integer, Boolean, Float, String, PickleType, DateTime
+
 from .database import Base
 
 
@@ -62,3 +63,40 @@ class Activity(Base):
     total_photo_count = Column(Integer)
     has_kudoed = Column(Boolean)
     suffer_score = Column(Integer)
+    # 
+
+
+class Athlete(Base):
+    __tablename__ = "athletes"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String)
+    resource_state = Column(Integer)
+    firstname = Column(String)
+    lastname = Column(String)
+    bio = Column(String)
+    city = Column(String)
+    state = Column(String)
+    country = Column(String)
+    sex = Column(String)
+    premium = Column(Boolean)
+    summit = Column(Boolean)
+    created_at = Column(DateTime)
+    updated_at = Column(DateTime)
+    badge_type_id = Column(Integer)
+    weight = Column(Float)
+    profile_medium = Column(String)
+    profile = Column(String)
+    friend = Column(Boolean)
+    follower = Column(Boolean)
+
+
+class Token(Base):
+    __tablename__ = "tokens"
+
+    athlete_id = Column(Integer, primary_key=True, index=True)
+    access_token = Column(String)
+    refresh_token = Column(String)
+    token_type = Column(String)
+    expires_at = Column(Integer)
+    expires_in = Column(Integer)

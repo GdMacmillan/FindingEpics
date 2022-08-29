@@ -1,0 +1,1 @@
+uvicorn findingepics_app.main:app --reload
