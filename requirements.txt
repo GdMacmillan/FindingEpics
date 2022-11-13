@@ -24,7 +24,7 @@ psycopg2==2.7.1
 py4j==0.10.4
 pycrypto==2.6.1
 pyparsing==2.2.0
-pyspark==2.1.1+hadoop2.7
+pyspark==3.2.2
 python-dateutil==2.6.0
 pytz==2017.2
 rcssmin==1.0.6
